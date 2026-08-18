@@ -1,6 +1,3 @@
 {
-  "installCommand": "npm install",
-  "buildCommand": "npm run build -w dropbyte-frontend",
-  "outputDirectory": "frontend/dist",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
