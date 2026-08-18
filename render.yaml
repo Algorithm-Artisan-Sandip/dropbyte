@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: dropbyte-api
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build -w dropbyte-backend
+    startCommand: npm run start -w dropbyte-backend
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CLUSTER_WORKERS
+        value: "1"
+      - key: COOKIE_NAME
+        value: dropbyte_token

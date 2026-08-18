@@ -1,0 +1,15 @@
+{
+  "name": "dropbyte",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["backend", "frontend"],
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c blue,green \"npm run dev -w dropbyte-backend\" \"npm run dev -w dropbyte-frontend\"",
+    "build": "npm run build -w dropbyte-backend && npm run build -w dropbyte-frontend",
+    "start": "concurrently -n backend,frontend -c blue,green \"npm run start -w dropbyte-backend\" \"npm run preview -w dropbyte-frontend\"",
+    "typecheck": "npm run typecheck -w dropbyte-backend && npm run typecheck -w dropbyte-frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
