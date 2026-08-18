@@ -3,7 +3,7 @@ services:
     name: dropbyte-api
     runtime: node
     plan: free
-    buildCommand: npm install && npm run build -w dropbyte-backend
+    buildCommand: npm install --include=dev && npm run build -w dropbyte-backend
     startCommand: npm run start -w dropbyte-backend
     healthCheckPath: /health
     envVars:

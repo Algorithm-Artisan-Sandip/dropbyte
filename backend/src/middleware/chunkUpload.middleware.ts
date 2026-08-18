@@ -17,7 +17,7 @@ export function chunkUpload(req: Request, res: Response, next: NextFunction): vo
     return;
   }
 
-  const done = file.parts.some((p) => p.partNumber === partNumber);
+  const done = file.parts.some((p: { partNumber: number }) => p.partNumber === partNumber);
   if (done && req.method !== "GET") {
     res.status(200).json({ skipped: true, partNumber });
     return;

@@ -30,7 +30,7 @@ function serialize(file: {
     progress: file.progress,
     partCount: file.partCount,
     chunkSize: file.chunkSize,
-    completedParts: file.parts.map((p) => p.partNumber),
+    completedParts: file.parts.map((p: { partNumber: number }) => p.partNumber),
     createdAt: file.createdAt,
     updatedAt: file.updatedAt,
   };
@@ -39,7 +39,7 @@ function serialize(file: {
 export async function listFiles(req: Request, res: Response): Promise<void> {
   const shares = await Share.find({ user: req.user!.id });
   const ids = shares.map((s) => s.file);
-  const files = await FileModel.find({ _id: { $in: ids } }).sort({ updatedAt: -1 });
+  const files = await FileModel.find({ _id: { $in: ids } });
   const roleByFile = new Map(shares.map((s) => [String(s.file), s.role]));
   res.json({
     files: files.map((f) => ({ ...serialize(f), role: roleByFile.get(String(f._id)) })),

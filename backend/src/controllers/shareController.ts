@@ -65,7 +65,7 @@ export async function listShares(req: Request, res: Response): Promise<void> {
   const shares = await Share.find({ file: fileId });
   res.json({
     shares: shares.map((s) => {
-      const u = s.user as unknown as { email: string };
+      const u = typeof s.user === "string" ? { email: "" } : s.user;
       return { id: String(s._id), email: u.email, role: s.role };
     }),
   });

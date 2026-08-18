@@ -4,14 +4,14 @@ import type { ShareRole } from "../types";
 export interface ShareDoc {
   _id: string;
   file: string;
-  user: string;
+  user: string | { email: string };
   role: ShareRole;
   save(): Promise<void>;
   deleteOne(): Promise<void>;
 }
 
-function hydrate(row: Record<string, unknown>, email?: string): ShareDoc & { user: string | { email: string } } {
-  const doc: ShareDoc & { user: string | { email: string } } = {
+function hydrate(row: Record<string, unknown>, email?: string): ShareDoc {
+  const doc: ShareDoc = {
     _id: String(row.id),
     file: String(row.file_id),
     user: email ? { email } : String(row.user_id),

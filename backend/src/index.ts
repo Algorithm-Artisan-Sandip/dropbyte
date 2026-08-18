@@ -35,7 +35,7 @@ async function startWorker(): Promise<void> {
   app.use(cookieParser());
   app.use(authOptional);
 
-  app.get("/health", async (_req, res) => {
+  app.get("/health", async (_req: Request, res: Response) => {
     const [postgres, storage] = await Promise.all([pingMongo(), pingStorage()]);
     const ok = postgres && storage;
     res.status(ok ? 200 : 503).json({ ok, pid: process.pid, postgres, storage });
